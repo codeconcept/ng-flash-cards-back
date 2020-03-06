@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Card } from 'src/interfaces/card.interface';
 import { Answer } from 'src/interfaces/answer.interface';
+import { Message } from './../interfaces/message.interface';
+import { rejects } from 'assert';
 
 @Injectable()
 export class CardsService {
@@ -30,5 +32,12 @@ export class CardsService {
             this.answers = answers;
             resolve({ msg: 'answers saved', date: new Date().toISOString() })
         });
+    }
+
+    resetGame(): Promise<Message> {
+        return new Promise(resolve => {
+            this.answers = [];
+            resolve({ msg: 'New game', date: new Date().toISOString() });                
+        })
     }
 }
